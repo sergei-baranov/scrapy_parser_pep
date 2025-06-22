@@ -6,7 +6,7 @@ from pep_parse.items import PepParseItem
 class PepSpider(scrapy.Spider):
     name = 'pep'
     allowed_domains = ['peps.python.org']
-    start_urls = ['https://peps.python.org/']
+    start_urls = ['https://peps.python.org/numerical/']
 
     def parse_pep(self, response):
         pep_name = response.meta.get('pep_name')
@@ -25,7 +25,7 @@ class PepSpider(scrapy.Spider):
 
     def parse(self, response, **kwargs):
         all_pep_rows = response.xpath(
-            '//section[@id="index-by-category"]'
+            '//section[@id="numerical-index"]'
             '//table[contains(@class, "pep-zero-table")]/tbody/tr')
 
         for pep_row in all_pep_rows:
@@ -35,9 +35,10 @@ class PepSpider(scrapy.Spider):
             )
             pep_anchor = pep_row.xpath('td[3]/a')[0]
             pep_name = pep_anchor.css('::text').get().strip()
+            pep_url = pep_anchor.attrib['href'].rstrip('/') + '/'
 
             yield response.follow(
-                pep_anchor,
+                pep_url,
                 callback=self.parse_pep,
                 meta={
                     'pep_number': pep_number,

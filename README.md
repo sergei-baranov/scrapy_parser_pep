@@ -1,6 +1,10 @@
 # scrapy_parser_pep
 
-Собирает текущий стейт PEP-ов на момент запуска из https://peps.python.org/.
+Учебный проект - парсер PEP-документации на `scrapy`.
+
+Реализация проекта: [Сергей Баранов](https://github.com/sergei-baranov/).
+
+Pipeline собирает текущий стейт PEP-ов на момент запуска из https://peps.python.org/.
 
 Формирует два файла:
 
