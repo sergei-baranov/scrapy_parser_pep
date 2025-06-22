@@ -14,6 +14,8 @@ except ModuleNotFoundError:
 def test_run_scrapy(mock_dirs):
     mock_base_dir = mock_dirs
 
+    print('mock_base_dir', mock_base_dir)
+
     process = CrawlerProcess(settings={
         'LOG_ENABLED': False,
         'LOG_LEVEL': 'ERROR',
